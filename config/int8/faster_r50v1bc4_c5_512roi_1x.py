@@ -103,9 +103,9 @@ def get_config(is_train):
 
     class DatasetParam:
         if is_train:
-            image_set = ("coco_train2014", "coco_valminusminival2014")
+            image_set = ("coco_train2017", )
         else:
-            image_set = ("coco_minival2014", )
+            image_set = ("coco_minival2017", )
 
     backbone = Backbone(BackboneParam)
     neck = Neck(NeckParam)
@@ -145,7 +145,7 @@ def get_config(is_train):
             fixed_param = ["conv0", "stage1", "gamma", "beta"]
 
         class QuantizeTrainingParam:
-            quantize_flag = True
+            quantize_flag = False
             # quantized_op = ("Convolution", "FullyConnected", "Deconvolution","Concat", "Pooling", "add_n", "elemwise_add")
             quantized_op = ("Convolution", "FullyConnected", "Deconvolution")
 
@@ -174,8 +174,8 @@ def get_config(is_train):
             clip_gradient = 35
 
         class schedule:
-            begin_epoch = 6
-            end_epoch = 12
+            begin_epoch = 0
+            end_epoch = 6
             lr_iter = [60000 * 16 // (len(KvstoreParam.gpus) * KvstoreParam.batch_image),
                        80000 * 16 // (len(KvstoreParam.gpus) * KvstoreParam.batch_image)]
 
