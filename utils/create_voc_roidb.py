@@ -43,7 +43,8 @@ def create_roidb(data_dir, label_map, split):
         root = tree.getroot()
         h = int(root.find("size/height").text)
         w = int(root.find("size/width").text)
-        filename = root.find("filename").text
+        #filename = root.find("filename").text
+        filename = (anno_name.split('/')[-1]).split('.')[0] + '.jpg'
         image_url = os.path.abspath(os.path.join(data_dir, "JPEGImages", filename))
         assert os.path.exists(image_url)
         im_id = i
