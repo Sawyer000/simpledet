@@ -1,6 +1,6 @@
 from symbol.builder import add_anchor_to_arg
 from models.cascade_rcnn.builder import CascadeRcnn as Detector
-from models.FPN.builder import DCNResNetVending as Backbone
+from models.dcn.builder import DCNResNetVending as Backbone
 from models.FPN.builder import FPNNeck as Neck
 from symbol.builder import RpnHead as RpnHead
 from models.FPN.builder import FPNRoiAlign as RoiExtractor
@@ -249,7 +249,7 @@ def get_config(is_train):
                     sym, arg, aux, RpnParam.anchor_generate.max_side,
                     stride, RpnParam.anchor_generate.scale,
                     RpnParam.anchor_generate.ratio)
-         class QuantizeTrainingParam:
+        class QuantizeTrainingParam:
             quantize_flag = False
             # quantized_op = ("Convolution", "FullyConnected", "Deconvolution","Concat", "Pooling", "add_n", "elemwise_add")
             quantized_op = ("Convolution", "FullyConnected", "Deconvolution")

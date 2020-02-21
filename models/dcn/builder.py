@@ -146,4 +146,4 @@ def hybrid_resnet_fpn_builder(special_resnet_unit):
 
 DCNResNetC4 = hybrid_resnet_c4_builder(dcn_resnet_unit)
 DCNResNetFPN = hybrid_resnet_fpn_builder(dcn_resnet_unit)
-DCNResNetVending = hybrid_resnet_Vending_builder(dcn_resnet_unit)
+DCNResNetVending = hybrid_resnet_vending_builder(dcn_resnet_unit)
