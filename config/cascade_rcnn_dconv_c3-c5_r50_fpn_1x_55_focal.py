@@ -2,7 +2,7 @@ from symbol.builder import add_anchor_to_arg
 from models.cascade_rcnn.builder import CascadeRcnn as Detector
 from models.dcn.builder import DCNResNetVending as Backbone
 from models.FPN.builder import FPNNeck as Neck
-from symbol.builder import RpnHead as RpnHead
+from models.FPN.builder import FPNRpnHead as RpnHead
 from models.FPN.builder import FPNRoiAlign as RoiExtractor
 from models.cascade_rcnn.builder import CascadeBbox2fcHead as BboxHead
 from mxnext.complicate import normalizer_factory
