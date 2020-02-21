@@ -87,20 +87,20 @@ def hybrid_resnet_vending_builder(special_resnet_unit):
             p = self.p
 
             import mxnext.backbone.resnet_v1b_helper as helper
-            num_c2, num_c3, num_c4, _ = helper.depth_config[p.depth]
+            num_c2, num_c3, num_c4, num_c5 = helper.depth_config[p.depth]
 
             data = X.var("data")
             if p.fp16:
                 data = data.astype("float16")
             c1 = helper.resnet_c1(data, p.normalizer)
-            c2 = hybrid_resnet_stage(c1, "stage1", num_c2, p.num_c2_block or 0, special_resnet_unit, 256, 1, 1,
-                p.normalizer, params=p)
+            c2 = helper.resnet_c2(c1, num_c2, 1, 1, p.normalizer)
             c3 = hybrid_resnet_stage(c2, "stage2", num_c3, p.num_c3_block or 0, special_resnet_unit, 512, 2, 1,
                 p.normalizer, params=p)
             c4 = hybrid_resnet_stage(c3, "stage3", num_c4, p.num_c4_block or 0, special_resnet_unit, 1024, 2, 1,
                 p.normalizer, params=p)
-
-            self.symbol = c4
+            c5 = hybrid_resnet_stage(c4, "stage4", num_c5, p.num_c5_block or 0, special_resnet_unit, 2048, 2, 1,
+                p.normalizer, params=p)
+            self.symbol = (c2, c3, c4, c5)
 
         def get_rpn_feature(self):
             return self.symbol
